@@ -1,0 +1,94 @@
+body {
+  background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.card {
+  position: relative;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Para mantener cuadrado */
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.card.flip .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Fondo frontal con degradado */
+.card-front {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  z-index: 2;
+}
+
+/* Emoji central suave */
+.card-front::before {
+  content: "🐾";
+  font-size: 3rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.2;
+  user-select: none;
+}
+
+/* Parte trasera con imagen */
+.card-back {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* Imagen en inicio */
+#home-screen img {
+  transition: transform 0.3s ease;
+}
+#home-screen img:hover {
+  transform: scale(1.05) rotate(3deg);
+}
+
+/* Imagen trofeo con sombra */
+#win-message img {
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+  border-radius: 15px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .card-container {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+  }
+}
